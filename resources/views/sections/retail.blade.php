@@ -1,6 +1,6 @@
 <section class="retail section container" id="retail">
     <div class="retail-visual reveal">
-        <img src="{{ asset($images['retail']) }}" width="1600" height="592" loading="lazy" alt="Fashion inspiration: a day out shopping">
+        <img src="{{ asset($images['retailFeature']) }}" width="1600" height="592" loading="lazy" alt="A curated selection of everyday fashion">
         <span class="retail-visual-label">YOUR NEXT FAVOURITE IS WAITING.</span>
         <div class="retail-stamp">PICK IT.<br>WEIGH IT.<br><em>Wow.</em></div>
     </div>

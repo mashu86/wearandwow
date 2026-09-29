@@ -1,3 +1,4 @@
+import './videos';
 import Swiper from 'swiper';
 import { Navigation, Pagination, A11y, Keyboard, Autoplay, EffectFade } from 'swiper/modules';
 
@@ -115,45 +116,8 @@ const collection = new Swiper('.collection-swiper', {
     a11y: { containerMessage: 'Wear and Wow collections', itemRoleDescriptionMessage: 'collection' },
 });
 
-const videoStates = new Map();
-const loadVideo = video => { if (!video.src) { video.src = video.dataset.src; video.load(); } };
-const playVideo = async video => {
-    loadVideo(video);
-    video.muted = true;
-    try { await video.play(); } catch { /* Playback remains available through the visible play button. */ }
-};
-document.querySelectorAll('.video-frame').forEach(frame => {
-    const video = frame.querySelector('video');
-    const button = frame.querySelector('.video-toggle');
-    const state = { visible: false, manuallyPaused: false };
-    videoStates.set(video, state);
-    const update = () => {
-        frame.classList.toggle('is-playing', !video.paused);
-        button.setAttribute('aria-label', `${video.paused ? 'Play' : 'Pause'} ${button.dataset.title}`);
-    };
-    video.addEventListener('play', update);
-    video.addEventListener('pause', update);
-    video.addEventListener('error', () => { frame.querySelector('.video-fallback').hidden = false; });
-    button.addEventListener('click', () => {
-        if (video.paused) { state.manuallyPaused = false; playVideo(video); }
-        else { state.manuallyPaused = true; video.pause(); }
-    });
-});
-if ('IntersectionObserver' in window) {
-    const videoObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-        const state = videoStates.get(entry.target);
-        state.visible = entry.isIntersecting;
-        if (entry.isIntersecting && !state.manuallyPaused && !motion.matches && !document.hidden && !navigator.connection?.saveData) playVideo(entry.target);
-        else entry.target.pause();
-    }), { threshold: 0.25 });
-    videoStates.forEach((state, video) => videoObserver.observe(video));
-}
-document.addEventListener('visibilitychange', () => videoStates.forEach((state, video) => {
-    if (document.hidden) video.pause();
-    else if (state.visible && !state.manuallyPaused && !motion.matches && !navigator.connection?.saveData) playVideo(video);
-}));
 motion.addEventListener('change', () => {
-    if (motion.matches) { document.documentElement.classList.remove('js-motion'); videoStates.forEach((state, video) => video.pause()); }
+    if (motion.matches) { document.documentElement.classList.remove('js-motion'); }
     hero.params.speed = motion.matches ? 0 : 1000;
     collection.params.speed = motion.matches ? 0 : 850;
     [hero, collection].forEach(swiper => {

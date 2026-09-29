@@ -8,6 +8,9 @@
 @case('phone')<path d="m7 3 3 5-2 2a15 15 0 0 0 6 6l2-2 5 3c0 3-2 4-4 4C10 20 4 14 3 7c0-2 1-4 4-4Z"/>@break
 @case('play')<path d="m9 5 11 7-11 7Z"/>@break
 @case('pause')<path d="M9 5v14M15 5v14"/>@break
+@case('expand')<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>@break
+@case('speaker')<path d="m11 4-6 5H2v6h3l6 5V4Z"/><path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>@break
+@case('speaker-muted')<path d="m11 4-6 5H2v6h3l6 5V4Z"/><path d="m16 9 6 6m0-6-6 6"/>@break
 @case('bag')<path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/>@break
 @case('box')<path d="m3 7 9-5 9 5v10l-9 5-9-5V7Zm0 0 9 5 9-5M12 12v10M7.5 4.5l9 5"/>@break
 @case('truck')<path d="M2 5h12v12H2V5Zm12 4h4l4 4v4h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>@break

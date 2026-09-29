@@ -7,7 +7,7 @@
     <meta name="description" content="Wear & Wow, Calicut. Discover ladies western wear at ₹{{ number_format($kgPricing['price_per_kg']) }}/KG, wholesale surplus bundles, jewellery and accessories.">
     <title>Wear & Wow — A little weight. A lot of wow.</title>
     <link rel="icon" type="image/png" href="{{ asset($brand['logo']) }}">
-    <link rel="preload" as="image" href="{{ asset($images['campaign']) }}">
+    <link rel="preload" as="image" href="{{ asset($heroSlides[0]['image']) }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>

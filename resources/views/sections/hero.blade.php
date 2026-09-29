@@ -14,7 +14,7 @@
                     @foreach($heroSlides as $slide)
                     <div class="swiper-slide">
                         <img src="{{ asset($slide['image']) }}" width="1600" height="592" alt="{{ $slide['label'] }} at Wear & Wow" style="object-position: {{ $slide['position'] }}" @if($loop->first) fetchpriority="high" @else loading="lazy" @endif>
-                        <span class="image-label">{{ strtoupper($slide['label']) }}</span>
+                        <x-hero-offer :slide="$slide" :rate="$kgPricing['price_per_kg']" />
                     </div>
                     @endforeach
                 </div>
@@ -22,7 +22,6 @@
             </div>
         </div>
         <div class="vertical-caption">THE ART OF EVERYDAY DRESSING</div>
-        <div class="hero-price"><span class="eyebrow">RETAIL / KG</span><p><sup>₹</sup>{{ number_format($kgPricing['price_per_kg']) }}<small>/ KG</small></p><span>LADIES WESTERN WEAR</span><a href="#retail" aria-label="Explore retail pricing"><x-icon /></a></div>
         <div class="hero-image-bottom"><span>FASHION BY WEIGHT</span><span><span class="hero-current">01</span> / <span class="hero-total">{{ str_pad(count($heroSlides), 2, '0', STR_PAD_LEFT) }}</span></span></div>
     </div>
     <a class="scroll-cue" href="#discover"><x-icon name="down" /> SCROLL TO DISCOVER</a>

@@ -1,4 +1,8 @@
 {
+  "_effect-fade-BqvygU5-.js": {
+    "file": "assets/effect-fade-BqvygU5-.js",
+    "name": "effect-fade"
+  },
   "node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-400-italic.woff": {
     "file": "assets/cormorant-garamond-cyrillic-400-italic-AH1vqu4S.woff",
     "src": "node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-400-italic.woff"
@@ -128,14 +132,31 @@
     "src": "node_modules/@fontsource/dm-sans/files/dm-sans-latin-ext-600-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Dre6jypO.css",
+    "file": "assets/app-BJ9U1zZQ.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/index2.css": {
+    "file": "assets/index2-D1ubCHMK.css",
+    "src": "resources/css/index2.css",
+    "isEntry": true
+  },
   "resources/js/app.js": {
-    "file": "assets/app-6Igb_zAe.js",
+    "file": "assets/app-CUhl0mg9.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_effect-fade-BqvygU5-.js"
+    ]
+  },
+  "resources/js/index2.js": {
+    "file": "assets/index2-BxmGFM08.js",
+    "name": "index2",
+    "src": "resources/js/index2.js",
+    "isEntry": true,
+    "imports": [
+      "_effect-fade-BqvygU5-.js"
+    ]
   }
 }
