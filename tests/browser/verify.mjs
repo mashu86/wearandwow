@@ -8,7 +8,7 @@ const results = [];
 const errors = [];
 await mkdir('artifacts', { recursive: true });
 try {
-    for (const width of [1920, 1440, 1280, 1024, 768, 430, 390, 375, 360]) {
+    for (const width of [1920, 1440, 1280, 1024, 820, 768, 701, 700, 600, 430, 390, 375, 360, 320]) {
         const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
         page.on('pageerror', error => errors.push(`${width}: ${error.message}`));
         page.on('console', message => { if (message.type() === 'error') errors.push(`${width}: ${message.text()}`); });
@@ -26,17 +26,28 @@ try {
         assert(socials.includes('https://www.facebook.com/people/Wear-wow/61585847387728/'));
         assert(socials.some(url => url.startsWith('https://www.google.com/maps/search/?api=1&query=')));
         assert(socials.filter(url => url.includes('wa.me')).every(url => url.startsWith('https://wa.me/919746827272')));
-        for (const id of ['home', 'discover', 'wholesale', 'bundles', 'retail', 'collections', 'shop', 'about', 'contact']) {
+        for (const id of ['home', 'discover', 'wholesale', 'bundles', 'retail', 'retail-demo', 'collections', 'shop', 'about', 'contact']) {
             await page.locator(`#${id}`).scrollIntoViewIfNeeded();
             const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
             assert(overflow <= 1, `${width}px: ${id} causes ${overflow}px page overflow`);
         }
-        for (const [weight, total] of [['0.5', '₹444'], ['1', '₹888'], ['2', '₹1,776']]) {
-            await page.locator(`[data-weight="${weight}"]`).click();
-            assert.equal(await page.locator('#retail-total').textContent(), total);
-            assert.equal(await page.locator(`[data-weight="${weight}"]`).getAttribute('aria-pressed'), 'true');
-            assert(decodeURIComponent(await page.locator('.retail-enquiry').getAttribute('href')).includes(`${weight} KG`));
+        if (width <= 700) {
+            const largeHeadings = await page.locator('h2').evaluateAll(elements => elements.filter(el => parseFloat(getComputedStyle(el).fontSize) > 38).map(el => el.textContent));
+            assert.deepEqual(largeHeadings, [], `${width}px: oversized mobile section headings`);
+            const clippedText = await page.locator('h1,h2,h3,.retail-price,.hero-actions,.footer-top nav').evaluateAll(elements => elements.filter(el => el.scrollWidth > el.clientWidth + 1).map(el => el.textContent));
+            assert.deepEqual(clippedText, [], `${width}px: clipped text or controls`);
+            assert(await page.locator('.retail-price').evaluate(el => parseFloat(getComputedStyle(el).fontSize) <= 80));
+            for (const frame of await page.locator('.video-frame').all()) {
+                const caption = await frame.locator('.video-caption').boundingBox();
+                const toggle = await frame.locator('.video-toggle').boundingBox();
+                assert(caption.x + caption.width <= toggle.x, `${width}px: video caption overlaps playback control`);
+            }
         }
+        assert.equal(await page.locator('.weight-option').count(), 0);
+        assert.equal(await page.locator('#retail-total').count(), 0);
+        assert((await page.locator('.retail-price').textContent()).includes('888'));
+        assert((await page.locator('.retail-rate-note').textContent()).includes('actual weight'));
+        assert(!decodeURIComponent(await page.locator('.retail-enquiry').getAttribute('href')).includes('1 KG'));
         await page.locator('#collections').scrollIntoViewIfNeeded();
         const initialIndex = await page.locator('.collection-swiper').evaluate(el => el.swiper.activeIndex);
         await page.locator('.collection-next').click();
@@ -46,6 +57,9 @@ try {
         if (width <= 700) {
             await page.locator('.menu-toggle').click();
             assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'), 'true');
+            const menuBox = await page.locator('.nav-links').boundingBox();
+            const headerBox = await page.locator('.site-header').boundingBox();
+            assert(Math.abs(menuBox.y - headerBox.y - headerBox.height) <= 1, 'Mobile menu must sit below the header');
             await page.locator('.nav-links a[href="#retail"]').click();
             assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'), 'false');
             await page.locator('.menu-toggle').click();
@@ -58,6 +72,12 @@ try {
         });
         const broken = await page.locator('img').evaluateAll(images => images.filter(img => !img.complete || !img.naturalWidth).map(img => img.src));
         assert.deepEqual(broken, []);
+        if (width === 390 || width === 320) {
+            for (const id of ['home', 'discover', 'wholesale', 'bundles', 'retail', 'retail-demo', 'collections', 'shop', 'about', 'contact']) {
+                await page.locator(`#${id}`).screenshot({ path: `artifacts/mobile-${width}-${id}.png` });
+            }
+            await page.locator('.site-footer').screenshot({ path: `artifacts/mobile-${width}-footer.png` });
+        }
         await page.evaluate(() => { window.scrollTo({ top: 0, behavior: 'instant' }); document.activeElement?.blur(); });
         await page.screenshot({ path: `artifacts/verified-${width}.png`, fullPage: width === 1440 || width === 390 });
         results.push({ width, passed: true, checks: 'pricing, carousel, navigation, links, images, reduced motion, page overflow' });

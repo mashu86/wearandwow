@@ -2,6 +2,7 @@
 
 $media = 'assets/wearandwow/';
 $rate = 888;
+$editorial = $media.'editorial/';
 
 return [
     'brand' => [
@@ -19,42 +20,42 @@ return [
         'whatsapp' => 'https://wa.me/919746827272',
     ],
     'images' => [
-        'campaign' => $media.'carousel/campaign.jpeg',
-        'retail' => $media.'carousel/retail.jpeg',
-        'bundles' => $media.'carousel/bundles.jpeg',
-        'accessories' => $media.'carousel/accessories.jpeg',
+        'campaign' => $editorial.'campaign.jpg',
+        'retail' => $editorial.'retail.jpg',
+        'bundles' => $editorial.'wardrobe.jpg',
+        'accessories' => $editorial.'bag.jpg',
     ],
     'heroSlides' => [
-        ['label' => 'The Wear & Wow edit', 'image' => $media.'carousel/campaign.jpeg', 'position' => '13% 50%'],
-        ['label' => 'Retail by the kilo', 'image' => $media.'carousel/retail.jpeg', 'position' => 'left center'],
-        ['label' => 'Wholesale bundles', 'image' => $media.'carousel/bundles.jpeg', 'position' => '43% center'],
-        ['label' => 'Accessories edit', 'image' => $media.'carousel/accessories.jpeg', 'position' => 'right center'],
+        ['label' => 'The Wear & Wow edit', 'image' => $editorial.'campaign.jpg', 'position' => 'center'],
+        ['label' => 'The dress edit', 'image' => $editorial.'dress.jpg', 'position' => 'center'],
+        ['label' => 'Everyday style inspiration', 'image' => $editorial.'style.jpg', 'position' => 'center'],
+        ['label' => 'Accessories edit', 'image' => $editorial.'bag.jpg', 'position' => 'center'],
     ],
     'wholesaleCategories' => [
-        ['name' => 'Ladies surplus', 'note' => 'Style, in abundance.', 'image' => $media.'carousel/retail.jpeg', 'position' => 'left'],
-        ['name' => 'Kids wear', 'note' => 'Little looks. Big possibilities.', 'image' => $media.'carousel/bundles.jpeg', 'position' => '78%'],
-        ['name' => 'Surplus bundles', 'note' => '80 KG & 100 KG options.', 'image' => $media.'carousel/bundles.jpeg', 'position' => '43%'],
-        ['name' => 'Jewellery', 'note' => 'The finishing touch.', 'image' => $media.'carousel/accessories.jpeg', 'position' => 'left'],
-        ['name' => 'Accessories', 'note' => 'Small details. More wow.', 'image' => $media.'carousel/accessories.jpeg', 'position' => 'right'],
+        ['name' => 'Ladies surplus', 'note' => 'Style, in abundance.', 'image' => $editorial.'dress.jpg', 'position' => 'center'],
+        ['name' => 'Kids wear', 'note' => 'Little looks. Big possibilities.', 'image' => $media.'carousel/bundles.jpeg', 'position' => 'center'],
+        ['name' => 'Surplus bundles', 'note' => '80 KG & 100 KG options.', 'image' => $media.'carousel/bundles.jpeg', 'position' => 'center'],
+        ['name' => 'Jewellery', 'note' => 'The finishing touch.', 'image' => $editorial.'jewellery.jpg', 'position' => 'center'],
+        ['name' => 'Accessories', 'note' => 'Small details. More wow.', 'image' => $editorial.'bag.jpg', 'position' => 'center'],
     ],
     'bundles' => [
-        ['id' => 'ladies-80', 'weight' => 80, 'category' => 'Ladies surplus', 'brand' => 'BKT', 'type' => 'Korean mix', 'image' => $media.'carousel/bundles.jpeg', 'position' => '35%', 'price' => 80 * $rate],
-        ['id' => 'ladies-100', 'weight' => 100, 'category' => 'Ladies surplus', 'brand' => 'AM', 'type' => 'Top', 'image' => $media.'carousel/retail.jpeg', 'position' => 'left', 'price' => 100 * $rate],
-        ['id' => 'kids-80', 'weight' => 80, 'category' => 'Kids wear', 'brand' => 'HKT', 'type' => 'Sweater', 'image' => $media.'carousel/bundles.jpeg', 'position' => '78%', 'price' => 80 * $rate],
-        ['id' => 'kids-100', 'weight' => 100, 'category' => 'Kids wear', 'brand' => 'BKT', 'type' => 'Korean mix', 'image' => $media.'carousel/accessories.jpeg', 'position' => 'right', 'price' => 100 * $rate],
+        ['id' => 'ladies-80', 'weight' => 80, 'category' => 'Ladies surplus', 'brand' => 'BKT', 'type' => 'Korean mix', 'image' => $media.'carousel/bundles.jpeg', 'position' => 'center', 'price' => 80 * $rate],
+        ['id' => 'ladies-100', 'weight' => 100, 'category' => 'Ladies surplus', 'brand' => 'AM', 'type' => 'Top', 'image' => $editorial.'retail.jpg', 'position' => 'center', 'price' => 100 * $rate],
+        ['id' => 'kids-80', 'weight' => 80, 'category' => 'Kids wear', 'brand' => 'HKT', 'type' => 'Sweater', 'image' => $media.'carousel/bundles.jpeg', 'position' => 'center', 'price' => 80 * $rate],
+        ['id' => 'kids-100', 'weight' => 100, 'category' => 'Kids wear', 'brand' => 'BKT', 'type' => 'Korean mix', 'image' => $editorial.'bag.jpg', 'position' => 'center', 'price' => 100 * $rate],
     ],
-    'kgPricing' => ['price_per_kg' => $rate, 'weights' => [0.5, 1, 2], 'default_weight' => 1],
+    'kgPricing' => ['price_per_kg' => $rate],
     'retailDemoProducts' => [
-        ['name' => 'Floral Western Dress', 'weight' => 0.5, 'image' => $media.'carousel/retail.jpeg', 'position' => 'left'],
-        ['name' => 'Casual Day Dress', 'weight' => 1, 'image' => $media.'carousel/campaign.jpeg', 'position' => '16%'],
-        ['name' => 'Party Wear Edit', 'weight' => 1.5, 'image' => $media.'carousel/retail.jpeg', 'position' => 'center'],
-        ['name' => 'Longline Trend Dress', 'weight' => 2, 'image' => $media.'carousel/campaign.jpeg', 'position' => '70%'],
+        ['name' => 'The Dress Edit', 'image' => $editorial.'dress.jpg', 'position' => 'center'],
+        ['name' => 'Everyday Style', 'image' => $editorial.'style.jpg', 'position' => 'center'],
+        ['name' => 'City Essentials', 'image' => $editorial.'retail.jpg', 'position' => 'center'],
+        ['name' => 'The Weekend Edit', 'image' => $editorial.'campaign.jpg', 'position' => 'center'],
     ],
     'retailProducts' => [
-        ['name' => 'The western edit', 'label' => 'Retail / KG', 'image' => $media.'carousel/retail.jpeg', 'position' => 'left', 'target' => '#retail', 'cta' => 'Explore retail', 'price_per_kg' => $rate],
-        ['name' => 'The surplus collection', 'label' => 'Wholesale', 'image' => $media.'carousel/bundles.jpeg', 'position' => '35%', 'target' => '#bundles', 'cta' => 'Discover bundles'],
-        ['name' => 'A little extra sparkle', 'label' => 'Wholesale jewellery', 'image' => $media.'carousel/accessories.jpeg', 'position' => 'left', 'target' => '#wholesale', 'cta' => 'Explore jewellery'],
-        ['name' => 'It’s all in the details', 'label' => 'Wholesale accessories', 'image' => $media.'carousel/accessories.jpeg', 'position' => 'right', 'target' => '#wholesale', 'cta' => 'Discover accessories'],
+        ['name' => 'The western edit', 'label' => 'Retail / KG', 'image' => $editorial.'retail.jpg', 'position' => 'center', 'target' => '#retail', 'cta' => 'Explore retail', 'price_per_kg' => $rate],
+        ['name' => 'The surplus collection', 'label' => 'Wholesale', 'image' => $media.'carousel/bundles.jpeg', 'position' => 'center', 'target' => '#bundles', 'cta' => 'Discover bundles'],
+        ['name' => 'A little extra sparkle', 'label' => 'Wholesale jewellery', 'image' => $editorial.'jewellery.jpg', 'position' => 'center', 'target' => '#wholesale', 'cta' => 'Explore jewellery'],
+        ['name' => 'It’s all in the details', 'label' => 'Wholesale accessories', 'image' => $editorial.'bag.jpg', 'position' => 'center', 'target' => '#wholesale', 'cta' => 'Discover accessories'],
     ],
     'videos' => [
         'shop' => [

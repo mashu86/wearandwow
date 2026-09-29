@@ -115,21 +115,6 @@ const collection = new Swiper('.collection-swiper', {
     a11y: { containerMessage: 'Wear and Wow collections', itemRoleDescriptionMessage: 'collection' },
 });
 
-const calculator = document.querySelector('.kg-calculator');
-const currency = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 });
-calculator.querySelectorAll('.weight-option').forEach(button => button.addEventListener('click', () => {
-    calculator.querySelectorAll('.weight-option').forEach(option => {
-        option.classList.toggle('selected', option === button);
-        option.setAttribute('aria-pressed', String(option === button));
-    });
-    const weight = Number(button.dataset.weight);
-    const price = Math.round(weight * Number(calculator.dataset.rate) * 100) / 100;
-    document.getElementById('retail-total').textContent = currency.format(price).replace(/\.00$/, '');
-    const link = calculator.querySelector('.retail-enquiry');
-    const message = `Hi Wear & Wow, I am interested in ${weight} KG of ladies western wear at ${currency.format(price)}. Please share availability.`;
-    link.href = `${link.dataset.whatsapp}?text=${encodeURIComponent(message)}`;
-}));
-
 const videoStates = new Map();
 const loadVideo = video => { if (!video.src) { video.src = video.dataset.src; video.load(); } };
 const playVideo = async video => {
